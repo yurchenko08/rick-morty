@@ -1,5 +1,5 @@
 import title from '../../img/title.png';
-export const Header = () => {
+const Header = () => {
   return (
     <div>
       <img
@@ -10,3 +10,4 @@ export const Header = () => {
     </div>
   );
 };
+export default Header;

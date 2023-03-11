@@ -1,0 +1,14 @@
+.input-container {
+  width: 100%;
+  .input {
+    width: 956px;
+    height: 24px;
+  }
+  .input::placeholder {
+    content: 'Additional text';
+    background-image: url('../../img/icon.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    padding-left: 20px;
+  }
+}
