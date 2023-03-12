@@ -17,6 +17,9 @@ const CharacterList = () => {
       .then(setIsLoading(true))
       .catch((e) => console.log(e.message));
   }, []);
+  const filteredCharacters = characters.filter((character) =>
+    character.name.toLowerCase().includes(search.toLowerCase())
+  );
   return (
     <>
       <div className='input-container'>
@@ -33,13 +36,12 @@ const CharacterList = () => {
       {isLoading ? null : <div>Loading...</div>}
       {characters && (
         <div className='character-list'>
-          {characters.map((character) => (
+          {filteredCharacters.map((character) => (
             <div key={character.id} className='character'>
-              <img
-                src={character.image}
-                alt={character.name}
-                className='character-image'
-              />
+              <div className='character-image'>
+                <img src={character.image} alt={character.name} />
+              </div>
+
               <div className='character-details'>
                 <p className='character-name'>{character.name}</p>
                 <p className='character-species'>{character.species}</p>
