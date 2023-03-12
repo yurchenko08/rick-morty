@@ -1,9 +1,6 @@
 import { useState, useEffect } from 'react';
 import './characterList.scss';
-import {
-  getCharacters,
-  transformCharacter,
-} from '../../services/getCharacters';
+import { getCharacters } from '../../services/getCharacters';
 const CharacterList = () => {
   const [search, setSearch] = useState('');
   const [isLoading, setIsLoading] = useState(false);

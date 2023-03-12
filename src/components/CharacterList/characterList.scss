@@ -13,23 +13,49 @@
     line-height: 150%;
     border: 1px solid rgba(0, 0, 0, 0.5);
     border-radius: 8px;
+    box-sizing: border-box;
   }
+
   .input::placeholder {
     background-image: url('../../img/icon.svg');
     background-repeat: no-repeat;
     background-size: contain;
     padding-left: 30px;
+
+    @media (max-width: 576px) {
+      background-size: 18px;
+      background-position: 10px center;
+      padding-left: 38px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .input {
+      height: 48px;
+      font-size: 14px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .input {
+      height: 40px;
+      font-size: 12px;
+    }
   }
 }
+
 .character-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  width: 100%;
+
   .character {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 10px;
+
     box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2), 0px 3px 4px rgba(0, 0, 0, 0.12),
       0px 2px 4px rgba(0, 0, 0, 0.14);
     border-radius: 4px;
@@ -37,21 +63,25 @@
     margin: 0 10px;
     margin-bottom: 20px;
   }
+
   .character-image {
     max-width: 100%;
     height: auto;
     padding-top: 28px;
+
     img {
       object-fit: cover;
       width: 100%;
     }
   }
+
   .character-details {
     width: 100%;
     display: flex;
     flex-direction: column;
     text-align: left;
   }
+
   .character-name {
     font-size: 20px;
     font-weight: 500;
@@ -64,5 +94,12 @@
     font-weight: 400;
     color: rgba(0, 0, 0, 0.6);
     margin: 1px 16px 12px;
+  }
+  @media (max-width: 768px) {
+    .character {
+      width: calc(100% - 20px);
+      margin: 0 10px;
+      margin-bottom: 20px;
+    }
   }
 }

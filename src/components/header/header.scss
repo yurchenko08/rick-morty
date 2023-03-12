@@ -1,0 +1,25 @@
+.header-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 86px;
+  margin-bottom: 16px;
+
+  .header-image {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  @media (max-width: 768px) {
+    .header-image {
+      max-width: 70%;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .header-image {
+      max-width: 100%;
+    }
+  }
+}
