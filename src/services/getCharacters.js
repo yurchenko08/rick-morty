@@ -18,3 +18,6 @@ export const transformCharacter = (character) => {
     image: character.image,
   };
 };
+export const sortingByName=(list)=>{
+ return list.sort((a, b) => a.name.localeCompare(b.name))
+}

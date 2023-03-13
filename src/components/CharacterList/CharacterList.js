@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import './characterList.scss';
-import { getCharacters } from '../../services/getCharacters';
+import { getCharacters, sortingByName } from '../../services/getCharacters';
 const CharacterList = () => {
   const [search, setSearch] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -9,7 +9,6 @@ const CharacterList = () => {
     getCharacters()
       .then((data) => {
         setCharacters(data);
-        console.log(data);
       })
       .then(setIsLoading(true))
       .catch((e) => console.log(e.message));
@@ -17,6 +16,9 @@ const CharacterList = () => {
   const filteredCharacters = characters.filter((character) =>
     character.name.toLowerCase().includes(search.toLowerCase())
   );
+  //sorting characters by name
+  sortingByName(filteredCharacters);
+
   return (
     <>
       <div className='input-container'>
