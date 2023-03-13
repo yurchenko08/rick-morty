@@ -1,12 +1,17 @@
 import './App.css';
-import Header from './components/Header/Header';
-import CharacterList from './components/CharacterList/CharacterList';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import MainPage from './pages/MainPage';
+import SingleCharacter from './components/SingleCharacter/SingleCharater';
 function App() {
   return (
-    <div className='App'>
-      <Header />
-      <CharacterList />
-    </div>
+    <Router>
+      <div className='App'>
+        <Routes>
+          <Route path='/' element={<MainPage />} />
+          <Route path='/details/:characterId' element={<SingleCharacter />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

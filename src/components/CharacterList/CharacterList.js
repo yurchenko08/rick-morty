@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import './characterList.scss';
+import { Link } from 'react-router-dom';
 import { getCharacters, sortingByName } from '../../services/getCharacters';
 const CharacterList = () => {
   const [search, setSearch] = useState('');
@@ -37,14 +38,16 @@ const CharacterList = () => {
         <div className='character-list'>
           {filteredCharacters.map((character) => (
             <div key={character.id} className='character'>
-              <div className='character-image'>
-                <img src={character.image} alt={character.name} />
-              </div>
+              <Link to={`/details/${character.id}`}>
+                <div className='character-image'>
+                  <img src={character.image} alt={character.name} />
+                </div>
 
-              <div className='character-details'>
-                <p className='character-name'>{character.name}</p>
-                <p className='character-species'>{character.species}</p>
-              </div>
+                <div className='character-details'>
+                  <p className='character-name'>{character.name}</p>
+                  <p className='character-species'>{character.species}</p>
+                </div>
+              </Link>
             </div>
           ))}
         </div>

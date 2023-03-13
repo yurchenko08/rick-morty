@@ -7,17 +7,12 @@ export const getCharacters = async () => {
   }
   return results;
 };
-export const transformCharacter = (character) => {
-  return {
-    id: character.id,
-    name: character.name,
-    status: character.status,
-    species: character.species,
-    origin: character.origin.name,
-    type: character.type || 'Unknown',
-    image: character.image,
-  };
+export const getSingleCharacter = async (id) => {
+  const res = await fetch(`${URL}/${id}`);
+  const data = await res.json();
+  return data;
 };
-export const sortingByName=(list)=>{
- return list.sort((a, b) => a.name.localeCompare(b.name))
-}
+
+export const sortingByName = (list) => {
+  return list.sort((a, b) => a.name.localeCompare(b.name));
+};
