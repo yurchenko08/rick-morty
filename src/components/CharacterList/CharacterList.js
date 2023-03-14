@@ -38,7 +38,7 @@ const CharacterList = () => {
         <div className='character-list'>
           {filteredCharacters.map((character) => (
             <div key={character.id} className='character'>
-              <Link to={`/details/${character.id}`}>
+              <Link to={`/details/${character.id}`} className='link'>
                 <div className='character-image'>
                   <img src={character.image} alt={character.name} />
                 </div>

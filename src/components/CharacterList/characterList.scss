@@ -106,4 +106,12 @@
       margin-bottom: 20px;
     }
   }
+  .link {
+    color: blue;
+    text-decoration: none;
+  }
+
+  .link:hover {
+    text-decoration: underline;
+  }
 }

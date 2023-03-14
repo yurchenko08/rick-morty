@@ -17,15 +17,21 @@ const SingleCharacter = ({ id }) => {
 
   return (
     <div className='wrapper'>
-      <div className='button-back'>GO BACK</div>
+      <Link to='/' className='back-button'>
+        <span>GO BACK</span>
+      </Link>
       {isLoading ? (
         <div className='character-container'>
           <div className='character-image'>
             <img src={character.image} alt={character.name} />
           </div>
           <div className='character-information'>
-            <h2>{character.name}</h2>
-            <p>Informations</p>
+            <h2 className='character-name'>{character.name}</h2>
+            <p
+              style={{ fontWeight: '500', fontSize: '20px', color: '#8E8E93' }}
+            >
+              Informations
+            </p>
             <div className='character-details'>
               <div>
                 <p>Gender</p>
