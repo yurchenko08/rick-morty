@@ -2,23 +2,34 @@ import { useState, useEffect } from 'react';
 import './characterList.scss';
 import { Link } from 'react-router-dom';
 import { getCharacters, sortingByName } from '../../services/getCharacters';
+
 const CharacterList = () => {
   const [search, setSearch] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [characters, setCharacters] = useState([]);
+  const [page, setPage] = useState(1);
+
   useEffect(() => {
-    getCharacters()
+    setIsLoading(true);
+    getCharacters(page)
       .then((data) => {
-        setCharacters(data);
+        setCharacters((prevCharacters) => [...prevCharacters, ...data]);
       })
-      .then(setIsLoading(true))
+      .then(() => setIsLoading(false))
       .catch((e) => console.log(e.message));
-  }, []);
-  const filteredCharacters = characters.filter((character) =>
-    character.name.toLowerCase().includes(search.toLowerCase())
-  );
-  //sorting characters by name
+  }, [page]);
+
+  const filteredCharacters = characters
+    .filter((character) =>
+      character.name.toLowerCase().includes(search.toLowerCase())
+    )
+    .slice(0, page * 8);
+
   sortingByName(filteredCharacters);
+
+  const handleLoadMore = () => {
+    setPage(page + 1);
+  };
 
   return (
     <>
@@ -33,7 +44,7 @@ const CharacterList = () => {
           }}
         />
       </div>
-      {isLoading ? null : <div>Loading...</div>}
+      {isLoading && <div>Loading...</div>}
       {characters && (
         <div className='character-list'>
           {filteredCharacters.map((character) => (
@@ -50,6 +61,9 @@ const CharacterList = () => {
               </Link>
             </div>
           ))}
+          {filteredCharacters.length < characters.length && (
+            <button onClick={handleLoadMore}>Load More</button>
+          )}
         </div>
       )}
     </>
