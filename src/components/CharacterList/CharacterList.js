@@ -18,30 +18,19 @@ const CharacterList = () => {
       .then(() => setIsLoading(false))
       .catch((e) => console.log(e.message));
   }, [page]);
-
   useEffect(() => {
     localStorage.setItem('search', search);
   }, [search]);
-
   const filteredCharacters = characters
     .filter((character) =>
       character.name.toLowerCase().includes(search.toLowerCase())
     )
-    .slice(0, 8);
+    .slice(0, page * 8);
 
-  //sorting characters by name
   sortingByName(filteredCharacters);
 
-  const getMoreCharacters = async () => {
-    try {
-      const nextPage = page + 1;
-      setPage(nextPage);
-      const newCharacters = await getCharacters(nextPage);
-
-      setCharacters((prevCharacters) => [...prevCharacters, ...newCharacters]);
-    } catch (error) {
-      console.error(error);
-    }
+  const handleLoadMore = () => {
+    setPage(page + 1);
   };
 
   return (
@@ -75,7 +64,7 @@ const CharacterList = () => {
             </div>
           ))}
           {filteredCharacters.length < characters.length && (
-            <button onClick={() => getMoreCharacters()}>Load More</button>
+            <button onClick={handleLoadMore}>Load More</button>
           )}
         </div>
       )}
