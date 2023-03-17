@@ -11,6 +11,7 @@ const SingleCharacter = ({ id }) => {
       const data = await getSingleCharacter(characterId);
       setCharacter(data);
       setIsLoading(true);
+      console.log(character);
     };
     fetchData();
   }, [characterId]);
@@ -34,24 +35,24 @@ const SingleCharacter = ({ id }) => {
             </p>
             <div className='character-details'>
               <div>
-                <p>Gender</p>
+                <p className='details-caption'>Gender</p>
                 <p>{character.gender}</p>
               </div>
               <div>
-                <p>Status</p>
+                <p className='details-caption'>Status</p>
                 <p>{character.status}</p>
               </div>
               <div>
-                <p>Specie</p>
-                <p>{character.specie}</p>
+                <p className='details-caption'>Specie</p>
+                <p>{character.species}</p>
               </div>
               <div>
-                <p>Origin</p>
+                <p className='details-caption'>Origin</p>
                 <p> {character.origin.name}</p>
               </div>
               <div>
-                <p>Type</p>
-                <p>{character.type}</p>
+                <p className='details-caption'>Type</p>
+                <p>{character.type ? character.type : 'Unknown'}</p>
               </div>
             </div>
           </div>
