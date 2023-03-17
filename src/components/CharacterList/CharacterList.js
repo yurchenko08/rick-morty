@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { getCharacters, sortingByName } from '../../services/getCharacters';
 
 const CharacterList = () => {
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState(localStorage.getItem('search') || '');
   const [isLoading, setIsLoading] = useState(false);
   const [characters, setCharacters] = useState([]);
   const [page, setPage] = useState(1);
@@ -19,16 +19,29 @@ const CharacterList = () => {
       .catch((e) => console.log(e.message));
   }, [page]);
 
+  useEffect(() => {
+    localStorage.setItem('search', search);
+  }, [search]);
+
   const filteredCharacters = characters
     .filter((character) =>
       character.name.toLowerCase().includes(search.toLowerCase())
     )
-    .slice(0, page * 8);
+    .slice(0, 8);
 
+  //sorting characters by name
   sortingByName(filteredCharacters);
 
-  const handleLoadMore = () => {
-    setPage(page + 1);
+  const getMoreCharacters = async () => {
+    try {
+      const nextPage = page + 1;
+      setPage(nextPage);
+      const newCharacters = await getCharacters(nextPage);
+
+      setCharacters((prevCharacters) => [...prevCharacters, ...newCharacters]);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -62,7 +75,7 @@ const CharacterList = () => {
             </div>
           ))}
           {filteredCharacters.length < characters.length && (
-            <button onClick={handleLoadMore}>Load More</button>
+            <button onClick={() => getMoreCharacters()}>Load More</button>
           )}
         </div>
       )}
