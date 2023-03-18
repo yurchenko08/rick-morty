@@ -32,6 +32,7 @@ const CharacterList = () => {
   const handleLoadMore = () => {
     setPage(page + 1);
   };
+  console.log(filteredCharacters.length);
 
   return (
     <>
@@ -63,8 +64,10 @@ const CharacterList = () => {
               </Link>
             </div>
           ))}
-          {filteredCharacters.length < characters.length && (
-            <button onClick={handleLoadMore}>Load More</button>
+          {filteredCharacters.length <= 32 && (
+            <div className='load-more-button'>
+              <button onClick={handleLoadMore}>Load More</button>
+            </div>
           )}
         </div>
       )}
