@@ -4,7 +4,7 @@ import MainPage from './pages/MainPage';
 import SingleCharacter from './components/SingleCharacter/SingleCharater';
 function App() {
   return (
-    <Router>
+    <Router basename='/rick-morty'>
       <div className='App'>
         <Routes>
           <Route path='/' element={<MainPage />} />
